@@ -11,7 +11,8 @@
 
 <body>
     <div class="section">
-        <div class="container">            
+        <div class="container">
+            <h1  id="myHeading" style="color: white; text-align: center; font-size: 60px;">1/1</h1>
             <div class="box">
                 <div class="item"></div>
             </div>
@@ -28,16 +29,29 @@
 
     <script>
         let item = `<div class="item"></div>`
+
         document.querySelector('.btn').onclick = function () {
-            let num = document.querySelector('.numerator').value
-            document.querySelector('.box').innerHTML = ''
-            let den = document.querySelector('.denominator').value
-            for (let i = 0; i < den; i++) {
-                document.querySelector('.box').insertAdjacentHTML('beforeend', item)
+            let num = +document.querySelector('.numerator').value
+            let den = +document.querySelector('.denominator').value            
+            if (num <= den && num > 0) {
+                document.querySelector('.box').innerHTML = ''
+                for (let i = 0; i < den; i++) {
+                    document.querySelector('.box').insertAdjacentHTML('beforeend', item)
+                }
+                let arr = document.querySelectorAll('.item')
+                for (let i = 0; i < num; i++) {
+                    arr[i].classList.add('red')
+                }
+                document.getElementById("myHeading").innerHTML = `${num}/${den}`                
             }
-            let arr = document.querySelectorAll('.item')
-            for (let i = 0; i < num; i++) {
-                arr[i].classList.add('red')
+            else if (den == 0) {
+                alert("На ноль делить нельзя!")
+            }
+            else if (den < 0) {
+                alert("Знаменатель должен быть положительным.")
+            }
+            else {
+                alert("Числитель не должен быть больше знаменателя, быть отрицательным и равным нулю.")
             }
         }
     </script>
